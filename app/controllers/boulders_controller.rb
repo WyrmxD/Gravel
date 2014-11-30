@@ -1,0 +1,3 @@
+class BouldersController < ApplicationController
+	
+end

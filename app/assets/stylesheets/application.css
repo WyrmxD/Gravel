@@ -1,0 +1,89 @@
+/*
+ *  CSS Layout
+ */
+
+ html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-bottom: 60px;
+}
+
+header {
+	height: 70px;
+}
+
+@media screen and (min-device-width: 400px) {
+  header {
+    height: 100px;
+  }
+}
+
+
+#user_panel {
+	height: 100px;	
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+
+/*
+ *  CSS Main Style
+ */ 
+
+body {
+	background-color: rgb(242, 243, 244);
+}
+
+header {
+	background-color: black;
+}
+
+#user_panel {
+	background-color: rgb(242, 243, 244);
+}
+
+#user_panel > ul {
+	padding: 0px;
+	list-style: none;
+}
+
+#user_panel a {
+	color: orange;
+}
+
+#mini_user_panel {
+	background-color: gray;
+	color: rgb(255, 185, 33);
+	text-align: center;
+	font-size: 1.1em;
+}
+
+#mini_user_panel div:hover {
+	background-color: orange;
+}
+
+#mini_user_panel a:hover {
+ 	color: white;
+ 	text-decoration: blink;
+ }
+
+/*
+ *  CSS Detail Style
+ */ 
+
+ a {
+ 	color: white;
+ }
+
+ a:hover {
+ 	color: orange;
+ 	text-decoration: blink;
+ }
