@@ -17,6 +17,8 @@
 			 document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
 			 document.getElementById('details').innerHTML += '<p>';
 		}
+
+		uploadFile()
 	}
  
 	function uploadFile() {
@@ -66,10 +68,8 @@
 
 $(document).ready(function() {
 
-	$('#btn_submitPic').click(function(event){
-		event.preventDefault();
-		event.stopPropagation();
-		uploadFile()
+	$('#camera_picture').on('click', function() {
+		$('#fileToUpload').trigger('click');
 	});
 
 });

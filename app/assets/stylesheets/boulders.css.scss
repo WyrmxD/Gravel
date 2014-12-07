@@ -1,3 +1,20 @@
 // Place all the styles related to the boulders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+input#fileToUpload {
+	display: none;
+}
+
+div.icon_big {
+	background-color: orange;
+	text-align: center;
+	margin: 10px;
+	border-radius: 13px;
+}
+
+span.icon_big {
+	font-size: 6em;
+	color: rgb(242, 243, 244);
+	padding: 0px 8px 0px 8px;
+}
