@@ -46,6 +46,36 @@ header {
 	background-color: black;
 }
 
+@media only screen and (max-width: 360px) {
+	header {
+		background:  url(<%= asset_path 'header_bg_360.jpg' %>) no-repeat 0px;
+	}
+}
+
+@media only screen and (min-width: 361px) and (max-width: 480px) {
+	header {
+		background:  url(<%= asset_path 'header_bg_480.jpg' %>) no-repeat 0px;
+	}
+}
+
+@media only screen and (min-width: 481px) and (max-width: 991px) {
+	header {
+		background:  url(<%= asset_path 'header_bg_991.jpg' %>) no-repeat 0px;
+	}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+	header {
+		background:  url(<%= asset_path 'header_bg_1024.jpg' %>) no-repeat 0px;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	header {
+		background:  url(<%= asset_path 'header_bg_1200.jpg' %>) no-repeat 0px;
+	}	
+}
+
 #user_panel {
 	background-color: rgb(242, 243, 244);
 }
