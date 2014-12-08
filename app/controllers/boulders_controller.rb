@@ -14,9 +14,9 @@ class BouldersController < ApplicationController
 	end
 
 	def upload_picture
-		boulder = params[:boulder]
-		File.open(Rails.root.join('public', 'uploads', boulder.original_filename), 'wb') do |file|
-			file.write(boulder.read)
+		picture = params[:picture]
+		File.open(Rails.root.join('public', 'uploads', "test.jpg"), 'wb') do |file|
+			file.write(picture.read)
 		end
 		render json: {response: "OK"}
 	end

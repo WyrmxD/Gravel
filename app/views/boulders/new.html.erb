@@ -12,7 +12,8 @@
 </div>
 
 <%= form_for @boulder, remote: true, authenticity_token: true do |f| %>
-	<%= f.file_field :picture, id: "fileToUpload", onchange: "fileSelected();", accept: "image/*", capture: "camera" %><br>
+	<%= f.file_field :picture, id: "pictureToUpload", onchange: "pictureTaken();", accept: "image/*", class: "hidden", capture: "camera" %><br>
+	<%= f.file_field :picture, id: "fileToUpload", onchange: "fileSelected();", accept: "image/*", class: "hidden"%><br>
 <% end %>
   
 <div id="details"></div>
