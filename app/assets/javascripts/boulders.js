@@ -1,24 +1,24 @@
 	function fileSelected() {
 	 
 		var count = document.getElementById('fileToUpload').files.length;
-		document.getElementById('details').innerHTML = "";
+		if(count > 0){
+			document.getElementById('details').innerHTML = "";
+			for (var index = 0; index < count; index ++){
 
-		for (var index = 0; index < count; index ++){
+				 var file = document.getElementById('fileToUpload').files[index];
+				 var fileSize = 0;
 
-			 var file = document.getElementById('fileToUpload').files[index];
-			 var fileSize = 0;
+				 if (file.size > 1024 * 1024) {
+					fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+				 } else {
+					fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+				 }
 
-			 if (file.size > 1024 * 1024) {
-				fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-			 } else {
-				fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-			 }
-
-			 document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
-			 document.getElementById('details').innerHTML += '<p>';
+				 document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
+				 document.getElementById('details').innerHTML += '<p>';
+			}
+			uploadFile()			
 		}
-
-		uploadFile()
 	}
  
 	function uploadFile() {
