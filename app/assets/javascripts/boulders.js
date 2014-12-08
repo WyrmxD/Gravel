@@ -69,12 +69,17 @@
 	        var fd = new FormData()
 	        var blob = dataURItoBlob(dataURL);
 			fd.append("picture", blob);
+			fd.append("boulder_id", getBoulderId());
 
 			uploadFile(fd)
 	      }
 	 
 	   }
 	   reader.readAsDataURL(file);
+	}
+
+	function getBoulderId(){
+		return $('form[id^="edit_boulder"]').prop('id')
 	}
 
 	function dataURItoBlob(dataURI) {
@@ -105,9 +110,15 @@
 		xhr.addEventListener("error", uploadFailed, false); 
 		xhr.addEventListener("abort", uploadCanceled, false); 
 		xhr.open("POST", "/boulders/upload_picture", true);
- 
+
 		xhr.send(fd); 
-	  }
+	}
+
+	function previewPicture(file){
+		var image = new Image();
+		image.src = file;
+	}
+
  
 	function uploadProgress(evt) {
 
