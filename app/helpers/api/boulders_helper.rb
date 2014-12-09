@@ -1,0 +1,2 @@
+module Api::BouldersHelper
+end
