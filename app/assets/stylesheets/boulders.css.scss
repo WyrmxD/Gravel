@@ -19,25 +19,25 @@ span.icon_big {
 	padding: 0px 8px 0px 8px;
 }
 
-#boulder_list ul{
+#boulder_div ul{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	list-style-type: none;
 }
 
-#boulder_list li {
+#boulder_div li {
 	margin-top: 2px;
 }
 
-#boulder_list img {
+#boulder_div img {
 	width: 200px;
 	margin-right: 10px;
 	border: 1px solid orange;
 }
 
 @media only screen and (max-width: 360px) {
-	#boulder_list img {
+	#boulder_div img {
 		width: 150px;
 	}
 }

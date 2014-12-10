@@ -144,15 +144,3 @@
 	function uploadCanceled(evt) {
 		alert("The upload has been canceled by the user or the browser dropped the connection.");
 	}
-
-$(document).ready(function() {
-
-	$('#camera_picture').on('click', function() {
-		$('#pictureToUpload').trigger('click');
-	});
-
-	$('#local_picture').on('click', function() {
-		$('#fileToUpload').trigger('click');
-	});
-
-});
