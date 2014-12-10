@@ -23,7 +23,7 @@ var API = {};
 		})
 
 		function error(data){
-			console.log("error");
+			console.log("error GET ", data);
 		}
 	}
 }(API));
