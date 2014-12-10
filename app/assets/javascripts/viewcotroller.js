@@ -3,7 +3,12 @@
 var ViewController = {};
 (function(ns){
 
+	var content = document.getElementById('content');
+
 	var routes = {
+		'site': {
+			'site_index_path': 			'/'
+		},
 		'boulder': {
 			'api_boulder_path': 		'/api/boulder',
 			'api_boulder_read_path': 	'/api/boulder/',
@@ -13,53 +18,31 @@ var ViewController = {};
 		}	
 	};
 
-	ns.get_boulders = function(){
-
-		function success_get_boulders(data){
-			console.log(data)
-		}
-		API.get('boulder.api_boulder_path', success_get_boulders)
-
+	ns.show_boulders = function(){
+		API.get('boulder.api_boulder_path', ns.display_boulders)
 	}
-
-	function error(data){
-		console.log('Error retrieving boulders', data)
-	}
-
-	ns.load = function(method, uri){
-		console.log(uri);
-		
-		$.ajax({
-			url: uri,
-			type: method,
-			success: success,
-			error: error,
-			complete: complete
-		})
-
-		function success(data){
-			console.log(data)
-			var api_action = data[0].api_action
-			if(api_action == 'api_boulder_path'){
-				console.log("{api_action: 'api_boulder_path'}")
-			}
-		}
-
-		function error(data){
-			console.log("error")
-		}
-
-		function complete(data){
-			console.log("complete")
-		}		
+	
+	ns.display_boulders = function(boulders){
+		console.log("display_boulders: ", boulders);
+		var boulder_list = document.createElement("ul");
+		var boulders_len = boulders.length;
+		for (var i = 0; i < boulders_len; i++) {
+			var li = document.createElement("li");
+			li.id = 'boulder_' + boulders[i].id;
+			li.textContent = boulders[i].name;
+			boulder_list.appendChild(li);
+		};
+		console.log(boulder_list);
+		content.appendChild(boulder_list);
 	}
 
 }(ViewController));
 
-
-
+/*
+/* NAVIGATION CAPTURED EVENTS 
+ */
 
 $('.js-api_boulder_path').click(function(event){
 	event.preventDefault();
-    ViewController.get_boulders();
+    ViewController.show_boulders();
 })
