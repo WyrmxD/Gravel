@@ -77,6 +77,12 @@ var ViewController = {};
 		document.getElementById('details').innerHTML += '<p>';
 	}
 
+	ns.update_progress_bar = function(progress){
+		var pb = $('#js-progress_bar');
+		pb.text(progress);
+		pb.css('width', progress);
+	}
+
 	/* HIDE & SEEK */
 	ns.show_picture_preview = function(){
 		$('#js-picture_upload').hide();

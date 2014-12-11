@@ -55,24 +55,12 @@ var API = {};
 
 	function uploadProgress(evt) {
 
-		var pb = $('#js-progress_bar');
 		if (evt.lengthComputable) {
 			var percentComplete = Math.round(evt.loaded * 100 / evt.total).toString() + '%';
-			pb.text(percentComplete);
-			pb.css('width', percentComplete);
-
-			//document.getElementById('progress').innerHTML = percentComplete.toString() + '%';
+			ViewController.update_progress_bar(percentComplete);
 		} else { 
-			pb.innerHTML = '0% error uploading';
-			//document.getElementById('progress').innerHTML = 'unable to compute';
+			ViewController.update_progress_bar('0% error uploading');
 		}
-	}
- 
-	function uploadComplete(evt) {
-
-		/* This event is raised when the server send back a response */ 
-		alert(evt.target.responseText);
-
 	}
  
 	function uploadFailed(evt) { 
