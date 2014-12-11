@@ -47,4 +47,18 @@ var boulder_create_div_tpl = '\
 			</div>\
 		</form>\
 	</div>\
-</div>';
+</div>\
+\
+<div class="row">\
+	<div class="col-xs-2 col-sm-1">\
+		<button id="js-send_boulder_form" type="submit" class="btn btn-success">Send</button>\
+	</div>\
+	<div class="col-xs-10 col-sm-6">\
+		<div class="progress progress_div">\
+			<div id="js-progress_bar" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">\
+				0%\
+			</div>\
+		</div>\
+	</div>\
+</div>\
+';

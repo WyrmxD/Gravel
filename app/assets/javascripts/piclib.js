@@ -3,51 +3,24 @@
 var PicLib = {};
 (function(ns){
 
-	var file_input = 'js-file_input';
-	var picture_input = 'js-picture_input';
+	var url_post_pic = "/api/boulder";
 	var resized_image;
+	var file_info;
 
-	function getFileInfo(count, id){
-		document.getElementById('details').innerHTML = "";
-		for (var index = 0; index < count; index ++){
-
-			var file = document.getElementById(id).files[index];
-			var fileSize = 0;
-
-			if (file.size > 1024 * 1024) {
-				fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
-			} else {
-				fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-			}
-
-			document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
-			document.getElementById('details').innerHTML += '<p>';
-		}
-		return file;
+	ns.get_file_info = function(){
+		return file_info;
 	}
 
-	ns.fileSelected = function(){	 
-		var input = document.getElementById(file_input);
+	ns.fileSelected = function(input_id){	 
+		var input = document.getElementById(input_id);
 		if(null !== input){
 			var count = input.files.length;
 		}
 		if(count > 0){
-			var file = getFileInfo(count, file_input);
+			var file = document.getElementById(input_id).files[0];
 			ns.resizeFile(file);
 		}
 	}
-
-	ns.pictureTaken = function(){
-		var input = document.getElementById(picture_input);
-		if(null !== input){
-			var count = input.files.length;
-		}
-		if(count > 0){
-			var file = getFileInfo(count, picture_input)
-			ns.resizeFile(file);
-		}
-	}
-
 
 	ns.resizeFile = function(file) {
 		var reader = new FileReader();
@@ -80,24 +53,32 @@ var PicLib = {};
 				ctx.drawImage(this, 0, 0, tempW, tempH);
 				var dataURL = canvas.toDataURL("image/jpeg");
 
-				var data = 'image=' + dataURL;
-				var fd = new FormData()
-				var blob = dataURItoBlob(dataURL);
-				fd.append("picture", blob);
-				previewPicture(blob);
-				fd.append("boulder_id", getBoulderId());
-
-				//uploadFile(fd)
+				resized_image = ns.dataURItoBlob(dataURL);
+				file_info = getFileInfo(resized_image);
+				ViewController.display_preview_picture(resized_image);
 			}
 		}
-	   reader.readAsDataURL(file);
+		reader.readAsDataURL(file);
+	}
+
+	function getFileInfo(file){
+		var fileSize = 0;
+
+		if (file.size > 1024 * 1024) {
+			fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+		} else {
+			fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+		}
+
+		console.log({size: fileSize, type: file.type});
+		return {size: fileSize, type: file.type};
 	}
 
 	function getBoulderId(){
 		return $('form[id^="edit_boulder"]').prop('id')
 	}
 
-	function dataURItoBlob(dataURI) {
+	ns.dataURItoBlob = function(dataURI) {
 		// convert base64/URLEncoded data component to raw binary data held in a string
 		var byteString;
 		if (dataURI.split(',')[0].indexOf('base64') >= 0)
@@ -124,19 +105,9 @@ var PicLib = {};
 		xhr.addEventListener("load", uploadComplete, false); 
 		xhr.addEventListener("error", uploadFailed, false); 
 		xhr.addEventListener("abort", uploadCanceled, false); 
-		xhr.open("POST", "/api/boulder", true);
+		xhr.open("POST", url_post_pic, true);
 
 		xhr.send(fd); 
-	}
-
-	function previewPicture(file){
-		var reader = new FileReader();
-		reader.onload = function (e) {
-			$('#picture_preview').attr('src', e.target.result);
-		}
-
-		reader.readAsDataURL(file);
-		ViewController.show_picture_preview();
 	}
 
  

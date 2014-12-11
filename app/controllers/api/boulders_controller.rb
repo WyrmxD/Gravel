@@ -12,7 +12,6 @@ class Api::BouldersController < ApplicationController
 	# POST
 	def create
 		picture = params[:picture]
-		boulder_id = params[:boulder_id].split("_")[2]
 		boulder = Boulder.create
 
 		if(!boulder.blank? || !picture.blank?) then
