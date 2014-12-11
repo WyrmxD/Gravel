@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-input.hidden {
+.hidden{
 	display: none;
 }
 
@@ -15,8 +15,19 @@ div.icon_big {
 
 span.icon_big {
 	font-size: 6em;
-	color: rgb(242, 243, 244);
 	padding: 0px 8px 0px 8px;
+}
+
+span.icon_medium {
+	font-size: 2.5em;
+}
+
+span.icon_small {
+	font-size: 1em;
+}
+
+span.icon_big:hover {
+	color: white;
 }
 
 #boulder_div ul{
@@ -40,4 +51,23 @@ span.icon_big {
 	#boulder_div img {
 		width: 150px;
 	}
+}
+
+div.picture_preview {
+	margin: 10px 5px 0 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 3px dashed #ccc;
+}
+
+img#picture_preview {
+	width: 150px;
+}
+
+.rotated {
+	-moz-transform: scale(-1, 1);
+	-webkit-transform: scale(-1, 1);
+	-o-transform: scale(-1, 1);
+	-ms-transform: scale(-1, 1);
+	transform: scale(-1, 1);
 }

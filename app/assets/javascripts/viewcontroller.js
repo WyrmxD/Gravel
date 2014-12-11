@@ -29,6 +29,25 @@ var ViewController = {};
 		$('#local_picture').on('click', function() {
 			$('#fileToUpload').trigger('click');
 		});
+
+		$('#fileToUpload').change(function(event){
+			console.log(event);
+			event.preventDefault();
+			PicLib.fileSelected();
+		})
+	}
+
+	/* HIDE & SEEK */
+	ns.show_picture_preview = function(){
+		$('#js-picture_upload').hide();
+		
+		$('#js-picture_preview').removeClass('hidden');
+		$('#js-picture_preview').show();
+	}
+
+	ns.show_picture_upload = function(){
+		$('#js-picture_upload').show();
+		$('#js-picture_preview').hide();
 	}
 
 }(ViewController));
@@ -47,3 +66,4 @@ $('.js-api_boulder_create_path').click(function(event){
 	event.preventDefault();
 	ViewController.show_create_boulder();
 })
+

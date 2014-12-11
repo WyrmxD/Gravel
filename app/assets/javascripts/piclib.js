@@ -1,19 +1,9 @@
-	function fileSelected() {
-	 
-		var count = document.getElementById('fileToUpload').files.length;
-		if(count > 0){
-			file = getFileInfo(count, 'fileToUpload');
-			resizeFile(file);
-		}
-	}
+"use strict";
 
-	function pictureTaken(){
-		var count = document.getElementById('pictureToUpload').files.length;
-		if(count > 0){
-			file = getFileInfo(count, 'pictureToUpload')
-			resizeFile(file);
-		}
-	}
+var PicLib = {};
+(function(ns){
+
+	var resized_image;
 
 	function getFileInfo(count, id){
 		document.getElementById('details').innerHTML = "";
@@ -34,7 +24,31 @@
 		return file;
 	}
 
-	function resizeFile(file) {
+	ns.fileSelected = function(){	 
+		console.log('HOLA');
+		var input = document.getElementById('fileToUpload');
+		if(null !== input){
+			var count = input.files.length;
+		}
+		if(count > 0){
+			var file = getFileInfo(count, 'fileToUpload');
+			ns.resizeFile(file);
+		}
+	}
+
+	ns.pictureTaken = function(){
+		var input = document.getElementById('pictureToUpload');
+		if(null !== input){
+			var count = input.files.length;
+		}
+		if(count > 0){
+			file = getFileInfo(count, 'pictureToUpload')
+			ns.resizeFile(file);
+		}
+	}
+
+
+	ns.resizeFile = function(file) {
 		var reader = new FileReader();
 	    reader.onloadend = function() {
 	 
@@ -149,3 +163,6 @@
 	function uploadCanceled(evt) {
 		alert("The upload has been canceled by the user or the browser dropped the connection.");
 	}
+
+
+}(PicLib));
