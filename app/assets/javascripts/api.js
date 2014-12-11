@@ -6,8 +6,8 @@ var API = {};
 	var routes = {
 		'boulder': {
 			'api_boulder_path': 		'/api/boulder',
+			'api_boulder_create_path':	'/api/boulder',
 			'api_boulder_read_path': 	'/api/boulder/',	// :id
-			'api_boulder_create_path':	'/api/boulder/',	// :id
 			'api_boulder_update_path':	'/api/boulder/',	// :id
 			'api_boulder_delete_path':	'/api/boulder/',	// :id
 		}	
@@ -26,5 +26,21 @@ var API = {};
 			console.log("error GET ", data);
 		}
 	}
+
+	ns.post = function(path, data, callback){
+		var path_params = path.split(".");
+		$.ajax({
+			url: routes[path_params[0]][path_params[1]],
+			type: 'post',
+			data: data,
+			success: callback,
+			error: error
+		})
+
+		function error(data){
+			console.log("error POST ", data);
+		}
+	}
+
 }(API));
 

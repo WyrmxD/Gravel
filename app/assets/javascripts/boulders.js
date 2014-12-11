@@ -109,7 +109,7 @@
 		xhr.addEventListener("load", uploadComplete, false); 
 		xhr.addEventListener("error", uploadFailed, false); 
 		xhr.addEventListener("abort", uploadCanceled, false); 
-		xhr.open("POST", "/boulders/upload_picture", true);
+		xhr.open("POST", "/api/boulder", true);
 
 		xhr.send(fd); 
 	}

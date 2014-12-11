@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
 	namespace :api do
 		get		'boulder'	=>	'boulders#index'
+		post	'boulder'	=>	'boulders#create', as: 'boulder_create'
 		get		'boulder/:id'	=>	'boulders#read', as: 'boulder_read'
-		post	'boulder/:id'	=>	'boulders#create', as: 'boulder_create'
 		put		'boulder/:id'	=>	'boulders#update', as: 'boulder_update'
 		delete	'boulder/:id'	=>	'boulders#delte', as: 'boulder_delete'
 	end
