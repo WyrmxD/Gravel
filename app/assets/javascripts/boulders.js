@@ -38,44 +38,46 @@
 		var reader = new FileReader();
 	    reader.onloadend = function() {
 	 
-	    var tempImg = new Image();
-	    tempImg.src = reader.result;
-	    tempImg.onload = function() {
-	 
-	        var MAX_WIDTH = 800;
-	        var MAX_HEIGHT = 600;
-	        var tempW = tempImg.width;
-	        var tempH = tempImg.height;
-	        if (tempW > tempH) {
-	            if (tempW > MAX_WIDTH) {
-	               tempH *= MAX_WIDTH / tempW;
-	               tempW = MAX_WIDTH;
-	            }
-	        } else {
-	            if (tempH > MAX_HEIGHT) {
-	               tempW *= MAX_HEIGHT / tempH;
-	               tempH = MAX_HEIGHT;
-	            }
-	        }
-	 
-	        var canvas = document.createElement('canvas');
-	        canvas.width = tempW;
-	        canvas.height = tempH;
-	        var ctx = canvas.getContext("2d");
-	        ctx.drawImage(this, 0, 0, tempW, tempH);
-	        var dataURL = canvas.toDataURL("image/jpeg");
+		    var tempImg = new Image();
+		    tempImg.src = reader.result;
+		    tempImg.onload = function() {
+		 
+				var MAX_WIDTH = 800;
+				var MAX_HEIGHT = 600;
+				var tempW = tempImg.width;
+				var tempH = tempImg.height;
+				if (tempW > tempH) {
+				    if (tempW > MAX_WIDTH) {
+				       tempH *= MAX_WIDTH / tempW;
+				       tempW = MAX_WIDTH;
+				    }
+				} else {
+				    if (tempH > MAX_HEIGHT) {
+				       tempW *= MAX_HEIGHT / tempH;
+				       tempH = MAX_HEIGHT;
+				    }
+				}
 
-	        var data = 'image=' + dataURL;
-	        var fd = new FormData()
-	        var blob = dataURItoBlob(dataURL);
-			fd.append("picture", blob);
-			fd.append("boulder_id", getBoulderId());
+				var canvas = document.createElement('canvas');
+				canvas.width = tempW;
+				canvas.height = tempH;
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(this, 0, 0, tempW, tempH);
+				var dataURL = canvas.toDataURL("image/jpeg");
 
-			uploadFile(fd)
-	      }
-	 
-	   }
+				var data = 'image=' + dataURL;
+				var fd = new FormData()
+				var blob = dataURItoBlob(dataURL);
+				fd.append("picture", blob);
+				previewPicture(blob);
+				fd.append("boulder_id", getBoulderId());
+
+				//uploadFile(fd)
+				//loadImage(blob);
+			}
+		}
 	   reader.readAsDataURL(file);
+	   //previewPicture(file);
 	}
 
 	function getBoulderId(){
@@ -115,8 +117,13 @@
 	}
 
 	function previewPicture(file){
-		var image = new Image();
-		image.src = file;
+		var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#picture_preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(file);
 	}
 
  
@@ -143,4 +150,15 @@
  
 	function uploadCanceled(evt) {
 		alert("The upload has been canceled by the user or the browser dropped the connection.");
+	}
+
+	function loadImage(image){
+		// var canvas = document.getElementById('picture_canvas');
+		// var context = canvas.getContext('2d');
+		// var imageObj = new Image();
+		// imageObj.onload = function(){
+		// 	canvas.drawImage(this, 0, 0);
+		// }
+		// imageObj.src = image;
+		console.log(image);
 	}
