@@ -3,6 +3,8 @@
 var PicLib = {};
 (function(ns){
 
+	var file_input = 'js-file_input';
+	var picture_input = 'js-picture_input';
 	var resized_image;
 
 	function getFileInfo(count, id){
@@ -25,24 +27,23 @@ var PicLib = {};
 	}
 
 	ns.fileSelected = function(){	 
-		console.log('HOLA');
-		var input = document.getElementById('fileToUpload');
+		var input = document.getElementById(file_input);
 		if(null !== input){
 			var count = input.files.length;
 		}
 		if(count > 0){
-			var file = getFileInfo(count, 'fileToUpload');
+			var file = getFileInfo(count, file_input);
 			ns.resizeFile(file);
 		}
 	}
 
 	ns.pictureTaken = function(){
-		var input = document.getElementById('pictureToUpload');
+		var input = document.getElementById(picture_input);
 		if(null !== input){
 			var count = input.files.length;
 		}
 		if(count > 0){
-			file = getFileInfo(count, 'pictureToUpload')
+			var file = getFileInfo(count, picture_input)
 			ns.resizeFile(file);
 		}
 	}

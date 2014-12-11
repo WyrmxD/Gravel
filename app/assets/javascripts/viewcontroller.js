@@ -23,15 +23,19 @@ var ViewController = {};
 		content.innerHTML = boulder_create_div;
 
 		$('#camera_picture').on('click', function() {
-			$('#pictureToUpload').trigger('click');
+			$('#js-picture_input').trigger('click');
 		});
 
 		$('#local_picture').on('click', function() {
-			$('#fileToUpload').trigger('click');
+			$('#js-file_input').trigger('click');
 		});
 
-		$('#fileToUpload').change(function(event){
-			console.log(event);
+		$('#js-picture_input').change(function(event){
+			event.preventDefault();
+			PicLib.pictureTaken();
+		})
+
+		$('#js-file_input').change(function(event){
 			event.preventDefault();
 			PicLib.fileSelected();
 		})
