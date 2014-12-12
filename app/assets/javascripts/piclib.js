@@ -4,25 +4,25 @@ var PicLib = {};
 (function(ns){
 
 	var url_post_pic = "/api/boulder";
-	var resized_image;
+	// var resized_image;
 	var file_info;
 
 	ns.get_file_info = function(){
 		return file_info;
 	}
 
-	ns.fileSelected = function(input_id){	 
+	ns.fileSelected = function(input_id, callback){	 
 		var input = document.getElementById(input_id);
 		if(null !== input){
 			var count = input.files.length;
 		}
 		if(count > 0){
 			var file = document.getElementById(input_id).files[0];
-			ns.resizeFile(file);
+			ns.resizeFile(file, callback);
 		}
 	}
 
-	ns.resizeFile = function(file) {
+	ns.resizeFile = function(file, callback) {
 		var reader = new FileReader();
 	    reader.onloadend = function() {
 	 
@@ -53,9 +53,10 @@ var PicLib = {};
 				ctx.drawImage(this, 0, 0, tempW, tempH);
 				var dataURL = canvas.toDataURL("image/jpeg");
 
-				resized_image = ns.dataURItoBlob(dataURL);
+				var resized_image = ns.dataURItoBlob(dataURL);
 				file_info = getFileInfo(resized_image);
 				ViewController.display_preview_picture(resized_image);
+				callback(resized_image);
 			}
 		}
 		reader.readAsDataURL(file);

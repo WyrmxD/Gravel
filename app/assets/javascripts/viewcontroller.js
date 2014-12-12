@@ -7,6 +7,7 @@ var ViewController = {};
 	var boulders_stored;
 	var preview_angle = 0;
 	var boulder_draft = null;
+	var new_image;
 
 	/* HTML Elements */
 	var content = document.getElementById('content');
@@ -28,14 +29,15 @@ var ViewController = {};
 	/*
 	 * New Boulder 
 	 */
-	ns.show_create_boulder = function(){
+	ns.show_create_boulder = function(reset){
 		content.innerHTML = "";
 		var boulder_create_div = HtmlHelpers.gen_boulder_create_div();
 		content.innerHTML = boulder_create_div;
 
-		if(boulder_draft == null){
+		if(boulder_draft == null || reset == 'reset'){
 			boulder_draft = new Boulder();
 			preview_angle = 0;
+			console.log('initializierrrr');
 		}else{
 			// TODO Load draft boulder into view
 		}
@@ -46,8 +48,6 @@ var ViewController = {};
 	}
 
 	function set_upload_picture_events(){
-		var picture_input = 'js-picture_input';
-		var file_input = 'js-file_input';
 		var js_picture_input = $('#js-picture_input');
 		var js_file_input = $('#js-file_input');
 
@@ -60,15 +60,26 @@ var ViewController = {};
 			js_file_input.trigger('click');
 		});
 
-		js_picture_input.change(function(event){
+		set_input_events();
+	}
+
+	function set_input_events(){
+		var picture_input = 'js-picture_input';
+		var file_input = 'js-file_input';
+
+		$('#js-picture_input').change(function(event){
 			event.preventDefault();
-			PicLib.fileSelected(picture_input);
+			PicLib.fileSelected(picture_input, set_boulder_pic);
 		});
 
-		js_file_input.change(function(event){
+		$('#js-file_input').change(function(event){
 			event.preventDefault();
-			PicLib.fileSelected(file_input);
+			PicLib.fileSelected(file_input, set_boulder_pic);
 		});
+	}
+
+	function set_boulder_pic(image_blob){
+		boulder_draft.picture = image_blob;
 	}
 
 	function set_tool_bar_events(){
@@ -87,9 +98,10 @@ var ViewController = {};
 		});
 
 		$('#js-delete_picture').click(function(){
-			preview_angle = 0;
-			boulder_draft = new Boulder();
-			ns.show_picture_upload();
+			// preview_angle = 0;
+			// boulder_draft = new Boulder();
+			// ns.show_picture_upload();
+			ns.show_create_boulder('reset');
 			console.log('DELETE!');
 			// TODO send DELETE AJAX
 		});
@@ -105,12 +117,17 @@ var ViewController = {};
 			var fd = new FormData()
 			fd.append('picture', blob);
 			fd.append('picture_angle', preview_angle);
+			if(boulder_draft != null){
+				fd.append('boulder_name', boulder_draft.name);				
+			}
+			console.log('boulder_draft.name', boulder_draft.name);
+			console.log('boulder_draft.picture', boulder_draft.picture);
 
 			ns.show_progress_bar();
-			API.post_form('boulder.api_boulder_create_path', fd, suc);
+			API.post_form('boulder.api_boulder_create_path', fd, success);
 		});
 
-		function suc(){
+		function success(){
 			console.log('OK');
 		}
 	}

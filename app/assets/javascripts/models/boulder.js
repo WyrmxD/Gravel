@@ -4,7 +4,7 @@ function Boulder(){
 
 	var id = 0;
 	var name = "";
-	var pcture = "";
+	var picture = "";
 	var location = "";
 	var latitude = 0;
 	var longitude = 0;
