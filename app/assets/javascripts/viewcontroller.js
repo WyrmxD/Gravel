@@ -31,21 +31,25 @@ var ViewController = {};
 		content.innerHTML = boulder_create_div;
 		preview_angle = preview_angle || 0;
 
+		var picture_preview = $('#picture_preview');
+		var js_picture_input = $('#js-picture_input');
+		var js_file_input = $('#js-file_input');
+
 		/* Events Upload Picture */
 		$('#camera_picture').on('click', function() {
-			$('#js-picture_input').trigger('click');
+			js_picture_input.trigger('click');
 		});
 
 		$('#local_picture').on('click', function() {
-			$('#js-file_input').trigger('click');
+			js_file_input.trigger('click');
 		});
 
-		$('#js-picture_input').change(function(event){
+		js_picture_input.change(function(event){
 			event.preventDefault();
 			PicLib.fileSelected(picture_input);
 		});
 
-		$('#js-file_input').change(function(event){
+		js_file_input.change(function(event){
 			event.preventDefault();
 			PicLib.fileSelected(file_input);
 		});
@@ -53,9 +57,9 @@ var ViewController = {};
 		/* Send button */
 		$('#js-send_boulder_form').click(function(event){
 			event.preventDefault();
-			var img = $('#picture_preview');
+			var picture_preview = $('#picture_preview');
 			
-			var blob = PicLib.dataURItoBlob(img.prop('src'));
+			var blob = PicLib.dataURItoBlob(picture_preview.prop('src'));
 			var fd = new FormData()
 			fd.append('picture', blob);
 			fd.append('picture_angle', preview_angle);
@@ -65,7 +69,6 @@ var ViewController = {};
 		});
 
 		/* Events Rotate & Delete pic */
-		var picture_preview = $('#picture_preview');
 		$('#js-rotate_right').click(function(){
 			preview_angle = (preview_angle + 90) % 360;
 			picture_preview.className = "rotate" + preview_angle;
@@ -73,7 +76,7 @@ var ViewController = {};
 		});
 
 		$('#js-rotate_left').click(function(){
-			preview_angle = (preview_angle + (360- 90)) % 360;
+			preview_angle = (preview_angle - 90) % 360;
 			picture_preview.className = "rotate" + preview_angle;
 			console.log('LEFT!', preview_angle);
 		});
