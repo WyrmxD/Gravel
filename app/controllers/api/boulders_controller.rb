@@ -14,15 +14,18 @@ class Api::BouldersController < ApplicationController
 		picture = params[:picture]
 		boulder = Boulder.create
 
-		if(!boulder.blank? || !picture.blank?) then
+		# TODO: rotate image
+
+		if(!boulder.blank? && !picture.blank?) then
 			write_picture(boulder, picture)
-			render json: {response: "OK"}
+			render json: {response: boulder.id}
 		end
 	end
 
 	protected
 	def write_picture(boulder, picture)
-		file_name = Time.now.strftime('%Y%m%d%H%M%S%L') + "-#{boulder.id}.jpg"
+		#file_name = Time.now.strftime('%Y%m%d%H%M%S%L') + "-#{boulder.id}.jpg"
+		file_name = "boulder-#{boulder.id}.jpg"
 		File.open(Rails.root.join('public', PICTURE_PATH, file_name), 'wb') do |file|
 			file.write(picture.read)
 		end

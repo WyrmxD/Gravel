@@ -24,13 +24,13 @@ var boulder_create_div_tpl = '\
 		</div>\
 		<div class="row">\
 			<div class="col-xs-4">\
-				<span class="glyphicon glyphicon-repeat icon_medium link_color" aria-hidden="true" id="local_picture"></span>\
+				<span class="glyphicon glyphicon-repeat icon_medium link_color" aria-hidden="true" id="js-rotate_right"></span>\
 			</div>\
 			<div class="col-xs-4">\
-				<span class="glyphicon glyphicon-repeat icon_medium rotated link_color" aria-hidden="true" id="local_picture"></span>\
+				<span class="glyphicon glyphicon-repeat icon_medium rotated link_color" aria-hidden="true" id="js-rotate_left"></span>\
 			</div>\
 			<div class="col-xs-4">\
-				<span class="glyphicon glyphicon-trash icon_medium link_color" aria-hidden="true" id="local_picture"></span>\
+				<span class="glyphicon glyphicon-trash icon_medium link_color" aria-hidden="true" id="js-delete_picture"></span>\
 			</div>\
 		</div>\
 	</div>\
@@ -38,7 +38,7 @@ var boulder_create_div_tpl = '\
 \
 <div class="row">\
 	<div class="col-xs-12 col-sm-6">\
-		<form role="form" accept-charset="UTF-8" action="#" class="edit_boulder" data-remote="true" enctype="multipart/form-data" id="edit_boulder_89" method="post">\
+		<form role="form" accept-charset="UTF-8" action="#" class="edit_boulder" data-remote="true" enctype="multipart/form-data" method="post">\
 			<input accept="image/*" capture="camera" class="hidden" id="js-picture_input" name="boulder[picture]" type="file"><br>\
 			<input accept="image/*" class="hidden" id="js-file_input" name="boulder[picture]" type="file"><br>\
 			<div class="form-group">\
@@ -53,8 +53,8 @@ var boulder_create_div_tpl = '\
 	<div class="col-xs-2 col-sm-1">\
 		<button id="js-send_boulder_form" type="submit" class="btn btn-success">Send</button>\
 	</div>\
-	<div class="col-xs-10 col-sm-6">\
-		<div class="progress progress_div">\
+	<div id="js-progress_div" class="col-xs-10 col-sm-6 progress_div hidden">\
+		<div class="progress">\
 			<div id="js-progress_bar" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">\
 				0%\
 			</div>\

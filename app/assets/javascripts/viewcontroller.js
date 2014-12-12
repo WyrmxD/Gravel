@@ -3,12 +3,16 @@
 var ViewController = {};
 (function(ns){
 
+	/* APP Status */
+	var boulders_stored;
+	var preview_angle = 0;
+
+	/* HTML Elements */
+	var content = document.getElementById('content');
 	var file_input = 'js-file_input';
 	var picture_input = 'js-picture_input';
 
-	var content = document.getElementById('content');
-	var boulders_stored;
-
+	/* Boulders */
 	ns.show_boulders = function(){
 		API.get('boulder.api_boulder_path', ns.display_boulders);
 	}
@@ -20,12 +24,14 @@ var ViewController = {};
 		content.appendChild(boulder_div);
 	}
 
+	/* New Boulder */
 	ns.show_create_boulder = function(){
 		content.innerHTML = "";
 		var boulder_create_div = HtmlHelpers.gen_boulder_create_div();
 		content.innerHTML = boulder_create_div;
+		preview_angle = preview_angle || 0;
 
-		/* Captured Events */
+		/* Events Upload Picture */
 		$('#camera_picture').on('click', function() {
 			$('#js-picture_input').trigger('click');
 		});
@@ -37,13 +43,14 @@ var ViewController = {};
 		$('#js-picture_input').change(function(event){
 			event.preventDefault();
 			PicLib.fileSelected(picture_input);
-		})
+		});
 
 		$('#js-file_input').change(function(event){
 			event.preventDefault();
 			PicLib.fileSelected(file_input);
-		})
+		});
 
+		/* Send button */
 		$('#js-send_boulder_form').click(function(event){
 			event.preventDefault();
 			var img = $('#picture_preview');
@@ -51,9 +58,32 @@ var ViewController = {};
 			var blob = PicLib.dataURItoBlob(img.prop('src'));
 			var fd = new FormData()
 			fd.append('picture', blob);
+			fd.append('picture_angle', preview_angle);
 
+			ns.show_progress_bar();
 			API.post_form('boulder.api_boulder_create_path', fd, suc);
-		})
+		});
+
+		/* Events Rotate & Delete pic */
+		var picture_preview = $('#picture_preview');
+		$('#js-rotate_right').click(function(){
+			preview_angle = (preview_angle + 90) % 360;
+			picture_preview.className = "rotate" + preview_angle;
+			console.log('RIGHT!', preview_angle);
+		});
+
+		$('#js-rotate_left').click(function(){
+			preview_angle = (preview_angle + (360- 90)) % 360;
+			picture_preview.className = "rotate" + preview_angle;
+			console.log('LEFT!', preview_angle);
+		});
+
+		$('#js-delete_picture').click(function(){
+			preview_angle = 0;
+			ns.show_picture_upload();
+			console.log('DELETE!');
+			// TODO send DELETE AJAX
+		});
 
 		function suc(){
 			console.log('OK');
@@ -94,6 +124,16 @@ var ViewController = {};
 	ns.show_picture_upload = function(){
 		$('#js-picture_upload').show();
 		$('#js-picture_preview').hide();
+	}
+
+	ns.show_progress_bar = function(){
+		ns.update_progress_bar('0%');
+		$('#js-progress_div').removeClass('hidden');
+		$('#js-progress_div').show();
+	}
+
+	ns.hide_progress_bar = function(){
+		$('#js-progress_div').hide();
 	}
 
 }(ViewController));
