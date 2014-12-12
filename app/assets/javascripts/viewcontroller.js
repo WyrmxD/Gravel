@@ -35,16 +35,20 @@ var ViewController = {};
 		content.innerHTML = boulder_create_div;
 
 		if(boulder_draft == null || reset == 'reset'){
-			boulder_draft = new Boulder();
-			preview_angle = 0;
-			console.log('initializierrrr');
+			initialize_create_boulder();
 		}else{
 			// TODO Load draft boulder into view
 		}
 
+		Geolocation.getGeoposition();
 		set_upload_picture_events();
 		set_tool_bar_events();
 		set_send_button_event();
+	}
+
+	function initialize_create_boulder(){
+		boulder_draft = new Boulder();
+		preview_angle = 0;
 	}
 
 	function set_upload_picture_events(){
@@ -98,9 +102,6 @@ var ViewController = {};
 		});
 
 		$('#js-delete_picture').click(function(){
-			// preview_angle = 0;
-			// boulder_draft = new Boulder();
-			// ns.show_picture_upload();
 			ns.show_create_boulder('reset');
 			console.log('DELETE!');
 			// TODO send DELETE AJAX
@@ -108,6 +109,7 @@ var ViewController = {};
 	}
 
 	function set_send_button_event(){
+
 		/* Send button */
 		var picture_preview = $('#picture_preview');
 		$('#js-send_boulder_form').click(function(event){
@@ -127,8 +129,8 @@ var ViewController = {};
 			API.post_form('boulder.api_boulder_create_path', fd, success);
 		});
 
-		function success(){
-			console.log('OK');
+		function success(response){
+			boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
 		}
 	}
 

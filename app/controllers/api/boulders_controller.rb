@@ -18,7 +18,7 @@ class Api::BouldersController < ApplicationController
 
 		if(!boulder.blank? && !picture.blank?) then
 			write_picture(boulder, picture)
-			render json: {response: boulder.id}
+			render json: {boulder_id: boulder.id}
 		end
 	end
 

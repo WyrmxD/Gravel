@@ -45,6 +45,10 @@ var boulder_create_div_tpl = '\
 				<label for="boulder_name">Name</label>\
 				<input type="text" class="form-control" id="boulder_name" placeholder="Boulder name">\
 			</div>\
+			<div class="form-group">\
+				<label for="boulder_location">Location</label>\
+				<input type="text" class="form-control" id="boulder_location" placeholder="Where is it?">\
+			</div>\
 		</form>\
 	</div>\
 </div>\
