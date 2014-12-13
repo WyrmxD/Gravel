@@ -135,32 +135,44 @@ var ViewController = {};
 	}
 
 	function set_send_button_event(){
-
 		/* Send button */
-		var picture_preview = $('#picture_preview');
 		$('#js-send_boulder_form').click(function(event){
 			event.preventDefault();
-			
-			var blob = PicLib.dataURItoBlob(picture_preview.prop('src'));
-			var fd = new FormData()
-			fd.append('picture', blob);
-			fd.append('picture_angle', preview_angle);
-			if(boulder_draft != null){
-				fd.append('boulder_name', boulder_draft.name);
-				fd.append('boulder_loc', boulder_draft.loc);
-				fd.append('boulder_latitude', boulder_draft.latitude);
-				fd.append('boulder_longitude', boulder_draft.longitude);
-			}
 
-			ns.show_progress_bar();
-			API.post_form('boulder.api_boulder_create_path', fd, success);
+			if (boulder_draft.is_filled()){
+				var fd = prepare_boulder_data();
+
+				ns.show_progress_bar();
+				API.post_form('boulder.api_boulder_create_path', fd, succ_boulder_sent);
+			} else {
+				show_message('What about you filling the stuff above?', 'warning', 10000);
+			}
 		});
 
-		function success(response){
-			boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
-			show_message('Boulder created! <a href="">check it</a>', 'success');
-			boulder_draft = null;
+	}
+
+	function prepare_boulder_data(){
+		var picture_preview = $('#picture_preview');
+		var blob = PicLib.dataURItoBlob(picture_preview.prop('src'));
+		var fd = new FormData()
+		fd.append('picture', blob);
+		fd.append('picture_angle', preview_angle);
+		fd.append('boulder_name', boulder_draft.name);
+		fd.append('boulder_loc', boulder_draft.loc);
+		
+		if (boulder_draft.has_coords()){
+			fd.append('boulder_latitude', boulder_draft.latitude);
+			fd.append('boulder_longitude', boulder_draft.longitude);
 		}
+		return fd;
+	}
+
+	function succ_boulder_sent(response){
+		boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
+		var msg = 'Boulder created! <a href="/boulder/'+ boulder_draft.id +'">check it</a>';
+		show_message(msg, 'success');
+		boulder_draft = null;
+		$('#js-send_boulder_form').unbind('click');
 	}
 
 	function set_geolocate_button_event(){
@@ -178,7 +190,7 @@ var ViewController = {};
 			js_geolocate_button.addClass('btn-success');
 			boulder_draft.latitude = position.coords.latitude;
 			boulder_draft.longitude = position.coords.longitude;
-			show_message("Coords OK!", 'success', 5000);
+			show_message("I got yo coords!", 'success', 5000);
 		}
 		function geoError(){
 			console.log('Error GPS');

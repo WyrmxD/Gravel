@@ -12,9 +12,18 @@ class Api::BouldersController < ApplicationController
 	# POST
 	def create
 		picture = params[:picture]
-		boulder = Boulder.create
+		picture_angle = params[:picture_angle]
+		
+		boulder = Boulder.new
+		boulder.name = params[:boulder_name]
+		boulder.location = params[:boulder_loc]
+		boulder.latitude = params[:boulder_latitude]
+		boulder.longitude = params[:boulder_longitude]
 
 		# TODO: rotate image
+		if(picture_angle != 0) then
+
+		end
 
 		if(!boulder.blank? && !picture.blank?) then
 			write_picture(boulder, picture)
@@ -30,6 +39,7 @@ class Api::BouldersController < ApplicationController
 			file.write(picture.read)
 		end
 		boulder.picture = PICTURE_PATH + file_name
+		boulder.posted
 		boulder.save
 	end
 

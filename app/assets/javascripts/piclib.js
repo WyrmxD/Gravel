@@ -71,7 +71,6 @@ var PicLib = {};
 			fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
 		}
 
-		console.log({size: fileSize, type: file.type});
 		return {size: fileSize, type: file.type};
 	}
 
