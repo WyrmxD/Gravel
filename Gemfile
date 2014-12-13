@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem 'byebug'
 gem 'quiet_assets'
+gem 'active_model_serializers'

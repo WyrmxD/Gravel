@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-input.hidden {
+.hidden{
 	display: none;
 }
 
@@ -15,6 +15,95 @@ div.icon_big {
 
 span.icon_big {
 	font-size: 6em;
-	color: rgb(242, 243, 244);
 	padding: 0px 8px 0px 8px;
+}
+
+span.icon_medium {
+	font-size: 2.5em;
+}
+
+span.icon_small {
+	font-size: 1.2em;
+}
+
+span.icon_big:hover {
+	color: white;
+}
+
+#boulder_div ul{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style-type: none;
+}
+
+#boulder_div li {
+	margin-top: 2px;
+}
+
+#boulder_div img {
+	width: 200px;
+	margin-right: 10px;
+	border: 1px solid orange;
+}
+
+div.dashed_border {
+	margin: 10px 5px 10px 5px;
+	padding: 10px 10px 10px 0;
+	border: 3px dashed #ccc;
+}
+
+div.success_border {
+	border-color: #449d44;
+}
+
+div.warning_border {
+	border-color: orange;
+}
+
+div.error_border {
+	border-color: #d9534f;
+}
+
+img#picture_preview {
+	width: 150px;
+}
+
+.rotated {
+	-moz-transform: scale(-1, 1);
+	-webkit-transform: scale(-1, 1);
+	-o-transform: scale(-1, 1);
+	-ms-transform: scale(-1, 1);
+	transform: scale(-1, 1);
+}
+
+.progress_div {
+	margin: 10px 0 10px 0;
+}
+
+@media only screen and (max-width: 359px){
+	#mini_user_panel {
+		font-size: 0.9em;
+	}
+	img#picture_preview {
+		width: 130px;
+	}
+
+	span.icon_big {
+		font-size: 5em;
+	}
+
+	span.icon_medium {
+		font-size: 2.2em;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	img#picture_preview {
+		width: 150px;
+	}
+}
+
+#js-message_display a {
+	color: orange;
 }
