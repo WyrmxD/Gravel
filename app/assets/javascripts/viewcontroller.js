@@ -37,11 +37,12 @@ var ViewController = {};
 		if(boulder_draft == null || reset == 'reset'){
 			initialize_create_boulder();
 		}else{
-			// TODO Load draft boulder into view
+			load_draft_boulder();
 		}
 
 		set_upload_picture_events();
 		set_tool_bar_events();
+		set_change_input_events();
 		set_send_button_event();
 		set_geolocate_button_event();
 	}
@@ -49,6 +50,19 @@ var ViewController = {};
 	function initialize_create_boulder(){
 		boulder_draft = new Boulder();
 		preview_angle = 0;
+	}
+
+	function load_draft_boulder(){
+		if(boulder_draft.name != ""){
+			$('#boulder_name').val(boulder_draft.name);
+		}
+		if(boulder_draft.loc != ""){
+			$('#boulder_location').val(boulder_draft.loc);
+		}
+
+		if(boulder_draft.picture != ""){
+			ViewController.display_preview_picture(boulder_draft.picture);
+		}
 	}
 
 	function set_upload_picture_events(){
@@ -65,6 +79,18 @@ var ViewController = {};
 		});
 
 		set_input_events();
+	}
+
+	function set_change_input_events(){
+
+		$('#boulder_name').blur(function(event){
+			boulder_draft.name = $(this).val();
+		})
+
+		$('#boulder_location').blur(function(event){
+			boulder_draft.loc = $(this).val();
+		})
+
 	}
 
 	function set_input_events(){
@@ -120,10 +146,11 @@ var ViewController = {};
 			fd.append('picture', blob);
 			fd.append('picture_angle', preview_angle);
 			if(boulder_draft != null){
-				fd.append('boulder_name', boulder_draft.name);				
+				fd.append('boulder_name', boulder_draft.name);
+				fd.append('boulder_loc', boulder_draft.loc);
+				fd.append('boulder_latitude', boulder_draft.latitude);
+				fd.append('boulder_longitude', boulder_draft.longitude);
 			}
-			console.log('boulder_draft.name', boulder_draft.name);
-			console.log('boulder_draft.picture', boulder_draft.picture);
 
 			ns.show_progress_bar();
 			API.post_form('boulder.api_boulder_create_path', fd, success);
@@ -131,6 +158,8 @@ var ViewController = {};
 
 		function success(response){
 			boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
+			show_message('Boulder created! <a href="">check it</a>', 'success');
+			boulder_draft = null;
 		}
 	}
 
@@ -149,7 +178,7 @@ var ViewController = {};
 			js_geolocate_button.addClass('btn-success');
 			boulder_draft.latitude = position.coords.latitude;
 			boulder_draft.longitude = position.coords.longitude;
-			show_message("Coords OK!", 'success');
+			show_message("Coords OK!", 'success', 5000);
 		}
 		function geoError(){
 			console.log('Error GPS');
@@ -207,14 +236,16 @@ var ViewController = {};
 		$('#js-progress_div').hide();
 	}
 
-	function show_message(str, type){
+	function show_message(str, type, milliseconds){
 		var js_message_display = $('#js-message_display');
 		set_message_type(js_message_display, type);
 		
 		js_message_display.children().html(str);
 		js_message_display.removeClass('hidden');
 		js_message_display.show();
-		hide_message();
+		if(milliseconds != undefined){
+			hide_message(milliseconds);
+		}
 	}
 
 	function set_message_type(element, type){
@@ -230,8 +261,8 @@ var ViewController = {};
 		}
 	}
 
-	function hide_message(){
-		$('#js-message_display').delay(5000).fadeOut();
+	function hide_message(milliseconds){
+		$('#js-message_display').delay(milliseconds).fadeOut();
 	}
 
 }(ViewController));

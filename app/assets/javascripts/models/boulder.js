@@ -2,12 +2,10 @@
 
 function Boulder(){
 
-	var id = 0;
-	var name = "";
-	var picture = "";
-	var location = "";
-	var latitude = 0;
-	var longitude = 0;
-
-	return self;
+	this.id = 0;
+	this.name = "";
+	this.picture = "";
+	this.loc = "";
+	this.latitude = 0;
+	this.longitude = 0;
 }

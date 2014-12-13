@@ -55,10 +55,10 @@ var boulder_create_div_tpl = '\
 \
 <div class="row">\
 	<div class="col-xs-3 col-sm-1">\
-		<button id="js-send_boulder_form" type="submit" class="btn btn-success">Send</button>\
+		<button id="js-send_boulder_form" class="btn btn-success">Send</button>\
 	</div>\
 	<div class="col-xs-3 col-sm-1">\
-		<button id="js-geolocate_button" type="submit" class="btn">\
+		<button id="js-geolocate_button" class="btn">\
 			<span class="glyphicon glyphicon-globe icon_small" aria-hidden="true" id="js-delete_picture"></span>\
 		</button>\
 	</div>\
