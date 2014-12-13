@@ -23,7 +23,7 @@ span.icon_medium {
 }
 
 span.icon_small {
-	font-size: 1em;
+	font-size: 1.2em;
 }
 
 span.icon_big:hover {
@@ -47,17 +47,22 @@ span.icon_big:hover {
 	border: 1px solid orange;
 }
 
-@media only screen and (max-width: 360px) {
-	#boulder_div img {
-		width: 150px;
-	}
+div.dashed_border {
+	margin: 10px 5px 10px 5px;
+	padding: 10px 10px 10px 0;
+	border: 3px dashed #ccc;
 }
 
-div.picture_preview {
-	margin: 10px 5px 0 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: 3px dashed #ccc;
+div.success_border {
+	border-color: #449d44;
+}
+
+div.warning_border {
+	border-color: orange;
+}
+
+div.error_border {
+	border-color: #d9534f;
 }
 
 img#picture_preview {
@@ -75,3 +80,27 @@ img#picture_preview {
 .progress_div {
 	margin: 10px 0 10px 0;
 }
+
+@media only screen and (max-width: 359px){
+	#mini_user_panel {
+		font-size: 0.9em;
+	}
+	img#picture_preview {
+		width: 130px;
+	}
+
+	span.icon_big {
+		font-size: 5em;
+	}
+
+	span.icon_medium {
+		font-size: 2.2em;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	img#picture_preview {
+		width: 150px;
+	}
+}
+

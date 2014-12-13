@@ -40,10 +40,10 @@ var ViewController = {};
 			// TODO Load draft boulder into view
 		}
 
-		Geolocation.getGeoposition();
 		set_upload_picture_events();
 		set_tool_bar_events();
 		set_send_button_event();
+		set_geolocate_button_event();
 	}
 
 	function initialize_create_boulder(){
@@ -134,6 +134,31 @@ var ViewController = {};
 		}
 	}
 
+	function set_geolocate_button_event(){
+		var js_geolocate_button = $('#js-geolocate_button');
+		
+		js_geolocate_button.click(function(event){
+			event.preventDefault();
+			js_geolocate_button.removeClass('btn-success');
+			js_geolocate_button.addClass('btn-info');
+			Geolocation.getGeoposition(geoSuccess, geoError, geoNotSupported);
+		})
+
+		function geoSuccess(position){
+			js_geolocate_button.removeClass('btn-info');
+			js_geolocate_button.addClass('btn-success');
+			boulder_draft.latitude = position.coords.latitude;
+			boulder_draft.longitude = position.coords.longitude;
+			show_message("Coords OK!", 'success');
+		}
+		function geoError(){
+			console.log('Error GPS');
+		}
+		function geoNotSupported(){
+			console.log('Browser Error GPS');	
+		}
+	}
+
 	ns.display_preview_picture = function(file){
 		var reader = new FileReader();
 		reader.onload = function (e) {
@@ -180,6 +205,33 @@ var ViewController = {};
 
 	ns.hide_progress_bar = function(){
 		$('#js-progress_div').hide();
+	}
+
+	function show_message(str, type){
+		var js_message_display = $('#js-message_display');
+		set_message_type(js_message_display, type);
+		
+		js_message_display.children().html(str);
+		js_message_display.removeClass('hidden');
+		js_message_display.show();
+		hide_message();
+	}
+
+	function set_message_type(element, type){
+		element.removeClass();
+		element.addClass('row');
+		element.addClass('dashed_border');
+		if(type == 'success'){
+			element.addClass('success_border');
+		}else if(type == 'warning'){
+			element.addClass('warning_border');
+		}else if(type == 'error'){
+			element.addClass('error_border');
+		}
+	}
+
+	function hide_message(){
+		$('#js-message_display').delay(5000).fadeOut();
 	}
 
 }(ViewController));

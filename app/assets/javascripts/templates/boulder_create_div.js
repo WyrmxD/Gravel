@@ -1,17 +1,17 @@
 var boulder_create_div_tpl = '\
 <div id="js-picture_upload" class="row">\
-	<div class="col-xs-6 col-sm-3 col-md-2">\
+	<div id="camera_picture" class="col-xs-6 col-sm-3 col-md-2">\
 		<div class="icon_big">\
-		<span class="glyphicon glyphicon-camera icon_big background_color" aria-hidden="true" id="camera_picture"></span>\
+		<span class="glyphicon glyphicon-camera icon_big background_color" aria-hidden="true"></span>\
 		</div>\
 	</div>\
-	<div class="col-xs-6 col-sm-3 col-md-2">\
+	<div id="local_picture" class="col-xs-6 col-sm-3 col-md-2">\
 		<div class="icon_big">\
-			<span class="glyphicon glyphicon-folder-open icon_big background_color" aria-hidden="true" id="local_picture"></span>\
+			<span class="glyphicon glyphicon-folder-open icon_big background_color" aria-hidden="true"></span>\
 		</div>\
 	</div>\
 </div>\
-<div id="js-picture_preview" class="row picture_preview hidden">\
+<div id="js-picture_preview" class="row dashed_border hidden">\
 	<div class="col-xs-6 col-sm-3 col-md-2">\
 		<img id="picture_preview" src="" >\
 	</div>\
@@ -54,15 +54,24 @@ var boulder_create_div_tpl = '\
 </div>\
 \
 <div class="row">\
-	<div class="col-xs-2 col-sm-1">\
+	<div class="col-xs-3 col-sm-1">\
 		<button id="js-send_boulder_form" type="submit" class="btn btn-success">Send</button>\
 	</div>\
-	<div id="js-progress_div" class="col-xs-10 col-sm-6 progress_div hidden">\
+	<div class="col-xs-3 col-sm-1">\
+		<button id="js-geolocate_button" type="submit" class="btn">\
+			<span class="glyphicon glyphicon-globe icon_small" aria-hidden="true" id="js-delete_picture"></span>\
+		</button>\
+	</div>\
+	<div id="js-progress_div" class="col-xs-6 col-sm-6 progress_div hidden">\
 		<div class="progress">\
 			<div id="js-progress_bar" class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">\
 				0%\
 			</div>\
 		</div>\
+	</div>\
+</div>\
+<div id="js-message_display" class="row dashed_border hidden">\
+	<div class="col-xs-12">\
 	</div>\
 </div>\
 ';
