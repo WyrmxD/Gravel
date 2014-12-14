@@ -55,7 +55,7 @@ var PicLib = {};
 
 				var resized_image = ns.dataURItoBlob(dataURL);
 				file_info = getFileInfo(resized_image);
-				ViewController.display_preview_picture(resized_image);
+				CreateBoulder.display_preview_picture(resized_image);
 				callback(resized_image);
 			}
 		}

@@ -57,9 +57,9 @@ var API = {};
 
 		if (evt.lengthComputable) {
 			var percentComplete = Math.round(evt.loaded * 100 / evt.total).toString() + '%';
-			ViewController.update_progress_bar(percentComplete);
+			CreateBoulder.update_progress_bar(percentComplete);
 		} else { 
-			ViewController.update_progress_bar('0% error uploading');
+			CreateBoulder.update_progress_bar('0% error uploading');
 		}
 	}
  

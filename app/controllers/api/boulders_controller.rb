@@ -19,11 +19,13 @@ class Api::BouldersController < ApplicationController
 		boulder.location = params[:boulder_loc]
 		boulder.latitude = params[:boulder_latitude]
 		boulder.longitude = params[:boulder_longitude]
+		boulder.save
 
 		# TODO: rotate image
 		if(picture_angle != 0) then
 
 		end
+		# TODO: make thumbnail
 
 		if(!boulder.blank? && !picture.blank?) then
 			write_picture(boulder, picture)
@@ -33,7 +35,6 @@ class Api::BouldersController < ApplicationController
 
 	protected
 	def write_picture(boulder, picture)
-		#file_name = Time.now.strftime('%Y%m%d%H%M%S%L') + "-#{boulder.id}.jpg"
 		file_name = "boulder-#{boulder.id}.jpg"
 		File.open(Rails.root.join('public', PICTURE_PATH, file_name), 'wb') do |file|
 			file.write(picture.read)
