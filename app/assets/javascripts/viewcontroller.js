@@ -206,10 +206,12 @@ var ViewController = {};
 			$('#picture_preview').attr('src', e.target.result);
 		}
 
-		reader.readAsDataURL(file);
-		ns.show_picture_preview();
-		var file_info = PicLib.get_file_info();
-		ns.display_image_info(file_info);
+		if (file != null){
+			reader.readAsDataURL(file);
+			ns.show_picture_preview();
+			var file_info = PicLib.get_file_info();
+			ns.display_image_info(file_info);
+		}
 	}
 
 	ns.display_image_info = function(file_info){
