@@ -3,6 +3,9 @@
 var HtmlPrimitives = {};
 (function(ns){
 
+	var PICTURE_PATH = "uploads/";
+	var THUMBNAIL_PATH = "uploads/thumbs/";
+
 	ns.gen_div = function(id, div_class){
 		var div = document.createElement('div');
 		if(typeof(id) !== 'undefined'){
@@ -23,7 +26,7 @@ var HtmlPrimitives = {};
 		var items_len = items.length;
 		for (i = 0; i < items_len; i++) {
 			var img = document.createElement("img");
-			img.setAttribute('src', items[i].picture);
+			img.setAttribute('src', THUMBNAIL_PATH + items[i].picture);
 
 			var li = ns.gen_list_item(items[i], id_prefix, item_class)
 			li.insertBefore(img,li.firstChild);
