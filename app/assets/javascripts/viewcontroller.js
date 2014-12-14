@@ -71,6 +71,7 @@ var ViewController = {};
 		js_message_display.removeClass('hidden');
 		js_message_display.show();
 		if(milliseconds != undefined){
+			console.log('hide?', milliseconds != undefined);
 			hide_message(milliseconds);
 		}
 	}

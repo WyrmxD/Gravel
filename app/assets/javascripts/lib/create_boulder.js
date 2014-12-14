@@ -93,14 +93,15 @@ var CreateBoulder = {};
 		var picture_preview = $('#picture_preview');
 		$('#js-rotate_right').click(function(){
 			preview_angle = (preview_angle + 90) % 360;
+			picture_preview.removeClass();
+			picture_preview.addClass("rotate" + preview_angle);
 			picture_preview.className = "rotate" + preview_angle;
-			console.log('RIGHT!', preview_angle);
 		});
 
 		$('#js-rotate_left').click(function(){
 			preview_angle = (preview_angle - 90) % 360;
-			picture_preview.className = "rotate" + preview_angle;
-			console.log('LEFT!', preview_angle);
+			picture_preview.removeClass();
+			picture_preview.addClass("rotate" + preview_angle);
 		});
 
 		$('#js-delete_picture').click(function(){
