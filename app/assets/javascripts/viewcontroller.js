@@ -27,18 +27,22 @@ var ViewController = {};
 	}
 
 	function set_boulder_link_events(){
-		$('.js-boulder_link').click(function(event){
-			event.preventDefault();
-			console.log($(this).prop('href').split('boulder/'));
-			var boulder_id = $(this).prop('href').split('boulder/')[1];
-			API.get('boulder.api_boulder_read_path', ns.show_boulder, boulder_id)
-		})
+		// $('.js-boulder_link').click(function(event){
+		// 	event.preventDefault();
+		// 	console.log($(this).prop('href').split('#boulder/'));
+		// 	var boulder_id = $(this).prop('href').split('boulder/')[1];
+		// 	API.get('boulder.api_boulder_read_path', ns.show_boulder, boulder_id)
+		// })
 	}
 
 	/*
 	 * Read Boulder
 	 */
-	ns.show_boulder = function(boulder){
+	ns.show_boulder = function(boulder_id){
+		API.get('boulder.api_boulder_read_path', ns.display_boulder, boulder_id)
+	}
+
+	ns.display_boulder = function(boulder){
 
 	}
 

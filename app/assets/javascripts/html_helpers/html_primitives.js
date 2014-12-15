@@ -49,7 +49,7 @@ var HtmlPrimitives = {};
 		var bd_element = boulder_object.children('.bd');
 
 		boulder_object.prop('id', 'boulder_' + boulder.id)
-		var boulder_link = URL_BOULDER + boulder.id;
+		var boulder_link = '#' +URL_BOULDER + boulder.id;
 		a_element.prop('href', boulder_link);
 		a_element.addClass('js-boulder_link');
 		a_element.children('img').prop('src', THUMBNAIL_PATH + boulder.picture);

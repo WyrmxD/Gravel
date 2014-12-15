@@ -16,3 +16,29 @@
 //= require_tree .
 
 "use strict";
+
+function check_landing_url(){
+	var params = document.URL.split('#');
+	if (params.length > 1){
+		internal_redirect(params[1]);
+	}
+};
+
+check_landing_url();
+
+$(window).bind('hashchange', function() {
+	var params = document.URL.split('#');
+	if (params.length > 1){
+		internal_redirect(params[1]);
+	}
+});
+
+function internal_redirect(uri){
+
+	var uri_parts = uri.split('/');
+	
+	if (uri_parts[0] == 'boulder'){
+		console.log('redirection_to ', uri_parts[1]);
+		ViewController.show_boulder(uri_parts[1]);
+	}
+}
