@@ -1,0 +1,55 @@
+.boulder_picture {
+	border: 1px solid orange;
+	width: 100%;
+}
+
+.boulder_picture_col {
+	padding: 0;
+}
+
+.boulder_info_col {
+	padding: 0;
+}
+
+@media only screen and (max-width: 500px) {
+
+	.boulder_picture {
+		padding: 0;
+	}
+
+	.boulder_picture_col {
+		width: 100%;
+	}
+
+	.boulder_info_col {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width:501px) and (max-width: 749px) {
+	.boulder_picture {
+		padding: 0;
+	}
+
+	.boulder_picture_col {
+		width: 60%;
+	}
+	.boulder_info_col {
+		width: 40%;
+	}
+}
+
+.boulder_read_name {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: white;
+	background-color: orange;
+	padding-left: 10px;
+	margin-bottom: 0;
+}
+
+.boulder_read_location {
+	color: white;
+	background-color: lightgray;
+	padding-left: 10px;
+}

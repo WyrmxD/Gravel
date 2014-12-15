@@ -15,7 +15,7 @@ var ViewController = {};
 	 */
 	ns.show_boulders = function(uri){
 		console.log(uri);
-		API.get('boulder.api_boulder_path', ns.display_boulders, get_boulders_params(uri));
+		API.get('boulder.api_boulder_path', ns.display_boulders, get_offset_limit(uri));
 	}
 	
 	ns.display_boulders = function(boulders){
@@ -25,7 +25,7 @@ var ViewController = {};
 		content.appendChild(boulder_div);
 	}
 
-	function get_boulders_params(uri){
+	function get_offset_limit(uri){
 		var params = uri.split('/');
 		return params[1];
 	}
@@ -38,7 +38,11 @@ var ViewController = {};
 	}
 
 	ns.display_boulder = function(boulder){
+		content.innerHTML = "";
+		var boulder_read_div = HtmlHelpers.gen_boulder_read_div();
+		content.innerHTML = boulder_read_div;
 
+		ReadBoulder.load_boulder(boulder);
 	}
 
 	/*

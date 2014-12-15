@@ -42,6 +42,8 @@ function internal_redirect(uri){
 		// #boulder/:id
 		var uri_parts = uri.split('/');
 		ViewController.show_boulder(uri_parts[1]);
+	} else {
+		// TODO 404
 	}
 }
 

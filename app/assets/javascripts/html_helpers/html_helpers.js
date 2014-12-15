@@ -18,4 +18,8 @@ var HtmlHelpers = {};
 		return boulder_create_div_tpl;
 	}
 
+	ns.gen_boulder_read_div = function(){
+		return boulder_read_div_tpl;
+	}
+
 }(HtmlHelpers));
