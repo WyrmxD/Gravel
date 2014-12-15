@@ -13,8 +13,9 @@ var ViewController = {};
 	/*
 	 * Boulders List
 	 */
-	ns.show_boulders = function(){
-		API.get('boulder.api_boulder_path', ns.display_boulders);
+	ns.show_boulders = function(uri){
+		console.log(uri);
+		API.get('boulder.api_boulder_path', ns.display_boulders, get_boulders_params(uri));
 	}
 	
 	ns.display_boulders = function(boulders){
@@ -22,6 +23,11 @@ var ViewController = {};
 		content.innerHTML = "";
 		var boulder_div = HtmlHelpers.gen_boulder_grid(boulders_stored);
 		content.appendChild(boulder_div);
+	}
+
+	function get_boulders_params(uri){
+		var params = uri.split('/');
+		return params[1];
 	}
 
 	/*

@@ -46,7 +46,7 @@ function internal_redirect(uri){
 }
 
 function go_to_boulders(route){
-	var regexp = /^boulders$/i;
+	var regexp = /^boulders/i;
 	return regexp.test(route);
 }
 
