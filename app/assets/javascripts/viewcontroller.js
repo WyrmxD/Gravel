@@ -22,17 +22,6 @@ var ViewController = {};
 		content.innerHTML = "";
 		var boulder_div = HtmlHelpers.gen_boulder_grid(boulders_stored);
 		content.appendChild(boulder_div);
-
-		set_boulder_link_events();
-	}
-
-	function set_boulder_link_events(){
-		// $('.js-boulder_link').click(function(event){
-		// 	event.preventDefault();
-		// 	console.log($(this).prop('href').split('#boulder/'));
-		// 	var boulder_id = $(this).prop('href').split('boulder/')[1];
-		// 	API.get('boulder.api_boulder_read_path', ns.show_boulder, boulder_id)
-		// })
 	}
 
 	/*

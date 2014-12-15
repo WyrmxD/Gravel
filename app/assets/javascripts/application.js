@@ -32,15 +32,27 @@ $(window).bind('hashchange', function() {
 
 function internal_redirect(uri){
 
-	var uri_parts = uri.split('/');
-	var route = uri_parts[0];
-
-	if (route == 'boulder' && uri_parts.length > 1){
-		console.log('redirection_to ', uri_parts[1]);
-		ViewController.show_boulder(uri_parts[1]);
-	} else if (route == 'boulders'){
-		ViewController.show_boulders();
-	} else if (route == 'boulder'){
+	if (go_to_boulders(uri)){
+		// #boulders
+		ViewController.show_boulders(uri);
+	} else if (go_to_new(uri)){
+		// #boulder
 		ViewController.show_create_boulder();
+	}else if (go_to_boulder(uri)){
+		// #boulder/:id
+		var uri_parts = uri.split('/');
+		ViewController.show_boulder(uri_parts[1]);
 	}
+}
+
+function go_to_boulders(route){
+	return route.substring(0,8) == 'boulders';
+}
+
+function go_to_new(route){
+	return route == 'boulder';
+}
+
+function go_to_boulder(route){
+	return route.substring(0,7) == 'boulder' && route.length > 7;
 }
