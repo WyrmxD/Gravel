@@ -51,7 +51,6 @@ var HtmlPrimitives = {};
 		boulder_object.prop('id', 'boulder_' + boulder.id)
 		var boulder_link = '#' +URL_BOULDER + boulder.id;
 		a_element.prop('href', boulder_link);
-		a_element.addClass('js-boulder_link');
 		a_element.children('img').prop('src', THUMBNAIL_PATH + boulder.picture);
 		bd_element.append('<p class="boulder_name"><a href="'+boulder_link+'" class="js-boulder_link">'+ boulder.name +'</a></p>');
 		bd_element.append('<p class="boulder_created">'+ boulder.created_at +'</p>');

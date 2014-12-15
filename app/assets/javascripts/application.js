@@ -27,18 +27,20 @@ function check_landing_url(){
 check_landing_url();
 
 $(window).bind('hashchange', function() {
-	var params = document.URL.split('#');
-	if (params.length > 1){
-		internal_redirect(params[1]);
-	}
+	check_landing_url();
 });
 
 function internal_redirect(uri){
 
 	var uri_parts = uri.split('/');
-	
-	if (uri_parts[0] == 'boulder'){
+	var route = uri_parts[0];
+
+	if (route == 'boulder' && uri_parts.length > 1){
 		console.log('redirection_to ', uri_parts[1]);
 		ViewController.show_boulder(uri_parts[1]);
+	} else if (route == 'boulders'){
+		ViewController.show_boulders();
+	} else if (route == 'boulder'){
+		ViewController.show_create_boulder();
 	}
 }

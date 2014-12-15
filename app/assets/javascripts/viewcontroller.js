@@ -115,18 +115,3 @@ var ViewController = {};
 
 }(ViewController));
 
-
-/*
-/* NAVIGATION CAPTURED EVENTS 
- */
-
-$('.js-api_boulder_path').click(function(event){
-	event.preventDefault();
-	ViewController.show_boulders();
-})
-
-$('.js-api_boulder_create_path').click(function(event){
-	event.preventDefault();
-	ViewController.show_create_boulder();
-})
-
