@@ -46,13 +46,16 @@ function internal_redirect(uri){
 }
 
 function go_to_boulders(route){
-	return route.substring(0,8) == 'boulders';
+	var regexp = /^boulders$/i;
+	return regexp.test(route);
 }
 
 function go_to_new(route){
-	return route == 'boulder';
+	var regexp = /^boulder$/i;
+	return regexp.test(route);
 }
 
 function go_to_boulder(route){
-	return route.substring(0,7) == 'boulder' && route.length > 7;
+	var regexp = /^boulder\/\d+$/i;
+	return regexp.test(route);
 }
