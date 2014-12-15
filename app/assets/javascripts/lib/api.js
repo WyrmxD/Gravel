@@ -13,11 +13,15 @@ var API = {};
 		}	
 	};
 
-	ns.get = function(path, callback){
+	ns.get = function(path, callback, param){
 		var path_params = path.split(".");
+		var url_get = routes[path_params[0]][path_params[1]];
+		if (param != undefined){
+			url_get += param;
+		}
 		$.ajax({
 			type: 'get',
-			url: routes[path_params[0]][path_params[1]],
+			url: url_get,
 			success: callback,
 			error: error
 		})

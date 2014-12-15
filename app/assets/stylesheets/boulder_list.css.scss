@@ -1,0 +1,62 @@
+/* Media Object */
+.boulder_object {
+	background-color: white;
+	margin:	5px;
+	border-radius: 0 13px 13px 0;
+	overflow:	hidden; 
+	_overflow:	visible; 
+	zoom:	1;
+}
+
+.boulder_object .bd {
+	overflow:hidden; 
+	_overflow:visible; 
+	zoom:1;
+}
+
+.boulder_object .img {
+	border: 1px solid orange;
+	float:left; 
+}
+
+.boulder_object .img img {
+	display: block;
+	width: 200px;
+}
+
+
+
+
+.boulder_object .bd p {
+	padding-left: 10px;
+}
+
+.boulder_name{
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+.boulder_name a:hover{
+	color: gray;
+}
+
+.boulder_created {
+	background-color: lightgray;
+	color: white;
+	font-size: 0.8em;
+	margin-bottom: 0px;
+}
+
+.boulder_location {
+	background-color: lightgray;
+	color: white;
+	font-size: 0.9em;
+}
+
+@media only screen and (max-width: 359px){
+	.boulder_object .img img { 
+		width: 150px;
+	}
+}

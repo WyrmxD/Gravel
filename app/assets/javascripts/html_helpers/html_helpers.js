@@ -5,9 +5,12 @@ var HtmlHelpers = {};
 
 	ns.gen_boulder_grid = function(boulders, div_class){
 		var boulder_div = HtmlPrimitives.gen_div('boulder_div', div_class);
-		
-		var boulder_list = HtmlPrimitives.gen_list(boulders, 'ul', 'boulder_');
-		boulder_div.appendChild(boulder_list);
+		var boulder_array = HtmlPrimitives.gen_boulder_array(boulders);
+		var i;
+		var boulders_len = boulder_array.length;
+		for(i = 0; i < boulders_len; i++){
+			$(boulder_div).append(boulder_array[i]);
+		}
 		return boulder_div;
 	}
 

@@ -3,6 +3,7 @@
 var HtmlPrimitives = {};
 (function(ns){
 
+	var URL_BOULDER = "boulder/"
 	var PICTURE_PATH = "uploads/";
 	var THUMBNAIL_PATH = "uploads/thumbs/";
 
@@ -25,14 +26,37 @@ var HtmlPrimitives = {};
 		var i;
 		var items_len = items.length;
 		for (i = 0; i < items_len; i++) {
-			var img = document.createElement("img");
-			img.setAttribute('src', THUMBNAIL_PATH + items[i].picture);
-
-			var li = ns.gen_list_item(items[i], id_prefix, item_class)
-			li.insertBefore(img,li.firstChild);
-			item_list.appendChild(li);
+			var boulder_object = build_boulder_object(items[i]);
+			$(item_list).append(boulder_object);
 		};
 		return item_list;
+	}
+
+	ns.gen_boulder_array = function(items){
+		var item_list = [];
+		var i;
+		var items_len = items.length;
+		for (i = 0; i < items_len; i++) {
+			var boulder_object = build_boulder_object(items[i]);
+			item_list.push(boulder_object);
+		};
+		return item_list;	
+	}
+
+	function build_boulder_object(boulder){
+		var boulder_object = $(boulder_object_tpl);
+		var a_element = boulder_object.children('a');
+		var bd_element = boulder_object.children('.bd');
+
+		boulder_object.prop('id', 'boulder_' + boulder.id)
+		var boulder_link = URL_BOULDER + boulder.id;
+		a_element.prop('href', boulder_link);
+		a_element.addClass('js-boulder_link');
+		a_element.children('img').prop('src', THUMBNAIL_PATH + boulder.picture);
+		bd_element.append('<p class="boulder_name"><a href="'+boulder_link+'" class="js-boulder_link">'+ boulder.name +'</a></p>');
+		bd_element.append('<p class="boulder_created">'+ boulder.created_at +'</p>');
+		bd_element.append('<p class="boulder_location">'+ boulder.location +'</p>');
+		return boulder_object;
 	}
 
 	ns.gen_list_item = function(item, id_prefix, item_class){
@@ -54,6 +78,10 @@ var HtmlPrimitives = {};
 	ns.gen_col = function(col_class){
 		var col = ns.gen_div(undefined, col_class);
 		return col;	
+	}
+
+	ns.gen_boulder = function(boulder){
+		var boulder_object = $(boulder_object_tpl);
 	}
 
 }(HtmlPrimitives));

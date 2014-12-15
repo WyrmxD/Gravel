@@ -22,6 +22,13 @@ class Api::BouldersController < ApplicationController
 		end
 	end
 
+	# GET :id
+	def read
+		boulder_id = params[:id]
+		boulder = Boulder.find(boulder_id)
+		render json: boulder, :root => false
+	end
+
 	protected
 
 	def create_boulder(params)
