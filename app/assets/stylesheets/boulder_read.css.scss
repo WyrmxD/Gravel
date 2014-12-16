@@ -4,12 +4,8 @@
 	padding: 0;
 }
 
-.boulder_picture_col {
-	padding: 0;
-}
-
-.boulder_info_col {
-	padding: 0;
+.no_padding{
+	padding: 0;	
 }
 
 @media only screen and (max-width: 500px) {
@@ -46,4 +42,9 @@
 	color: white;
 	background-color: lightgray;
 	padding-left: 10px;
+	margin-bottom: 0;
+}
+
+.map-canvas{
+	height: 200px;
 }
