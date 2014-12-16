@@ -33,6 +33,17 @@ var ReadBoulder = {};
 		};
 
 		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+		var boulderPos = new google.maps.LatLng(boulder.latitude, boulder.longitude);
+		addMark(map, boulderPos);
+	}
+
+	function addMark(map, myPos){
+		var marker = new google.maps.Marker({
+			position: myPos,
+			draggable: false,
+			map: map
+		});
+		marker.setMap(map);
 	}
 
 
