@@ -146,7 +146,7 @@ var CreateBoulder = {};
 
 	function succ_boulder_sent(response){
 		boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
-		var msg = 'Boulder created! <a href="/boulder/'+ boulder_draft.id +'">check it</a>';
+		var msg = 'Boulder created! <a href="/#boulder/'+ boulder_draft.id +'">check it</a>';
 		ViewController.show_message(msg, 'success');
 		boulder_draft = null;
 		$('#js-send_boulder_form').unbind('click');

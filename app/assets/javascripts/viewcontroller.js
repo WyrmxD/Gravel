@@ -109,7 +109,9 @@ var ViewController = {};
 	}
 
 	function hide_message(milliseconds){
-		$('#js-message_display').delay(milliseconds).fadeOut();
+		if (milliseconds != undefined) {
+			$('#js-message_display').delay(milliseconds).fadeOut();
+		}
 	}
 
 }(ViewController));
