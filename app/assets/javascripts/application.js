@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require freedrawing-min
 //= require_tree .
 
 "use strict";
