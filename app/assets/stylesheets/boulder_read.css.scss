@@ -1,15 +1,13 @@
 .boulder_picture {
-	border: 1px solid orange;
+	border-top: 1px solid orange;
+	border-left: 1px solid orange;
+	border-right: 1px solid orange;
 	width: 100%;
 	padding: 0;
 }
 
-.boulder_picture_col {
-	padding: 0;
-}
-
-.boulder_info_col {
-	padding: 0;
+.no_padding{
+	padding: 0;	
 }
 
 @media only screen and (max-width: 500px) {
@@ -46,4 +44,10 @@
 	color: white;
 	background-color: lightgray;
 	padding-left: 10px;
+	margin-bottom: 0;
+}
+
+.map-canvas{
+	height: 200px;
+	border: 1px solid orange;
 }
