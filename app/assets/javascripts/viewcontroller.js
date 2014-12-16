@@ -14,7 +14,6 @@ var ViewController = {};
 	 * Boulders List
 	 */
 	ns.show_boulders = function(uri){
-		console.log(uri);
 		API.get('boulder.api_boulder_path', ns.display_boulders, get_offset_limit(uri));
 	}
 	

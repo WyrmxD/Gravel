@@ -1,5 +1,7 @@
 .boulder_picture {
-	border: 1px solid orange;
+	border-top: 1px solid orange;
+	border-left: 1px solid orange;
+	border-right: 1px solid orange;
 	width: 100%;
 	padding: 0;
 }
@@ -47,4 +49,5 @@
 
 .map-canvas{
 	height: 200px;
+	border: 1px solid orange;
 }
