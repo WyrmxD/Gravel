@@ -66,6 +66,8 @@ var ViewController = {};
 		boulder_picture.prop('display', 'hidden');
 		var boulder_edit_div = HtmlHelpers.gen_boulder_edit_div(boulder_picture);
 		content.innerHTML = boulder_edit_div;
+		$('.boulder_read_name').append(boulder.name);
+		$('.boulder_read_location').append(boulder.location);
 		$('#boulder_picture_col').prepend(boulder_picture);
 
 
@@ -83,7 +85,9 @@ var ViewController = {};
 			$('#canvas').prop('width', width);
 			$('#canvas').prop('height', height);
 			$('#canvas').removeAttr('visibility');
-			var canvas = new fabric.Canvas("canvas");
+			var canvas = new fabric.Canvas("canvas", {
+				selection: false
+			});
 			oImg.set({
 				width: width,
 				height: height,
@@ -98,7 +102,7 @@ var ViewController = {};
 
 				console.log(X_coord, Y_coord);
 				if (options.target) {
-					console.log('an object was clicked! ', options.target.type);
+					console.log('an object was clicked! ', options.target.left);
 				} else {
 					if ( valid_coords(X_coord, Y_coord)){
 						addCircle(canvas, 'red', X_coord, Y_coord);
@@ -122,6 +126,16 @@ var ViewController = {};
 				fill: color, 
 				left: X-15, 
 				top: Y-15
+			});
+			circle.on('modified', function() {
+				var modified_circles = canvas.getObjects();
+				var i;
+				var len = modified_circles.length;
+				circles = [];
+				for(i=0; i < len; i++){
+					storeNode(modified_circles[i].left, modified_circles[i].top);
+				}
+				console.log(modified_circles);
 			});
 			canvas.add(circle);
 		}
