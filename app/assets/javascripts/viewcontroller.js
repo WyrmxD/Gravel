@@ -100,13 +100,18 @@ var ViewController = {};
 				if (options.target) {
 					console.log('an object was clicked! ', options.target.type);
 				} else {
-					addCircle(canvas, 'red', X_coord, Y_coord);
-					storeNode(X_coord, Y_coord);
+					if ( valid_coords(X_coord, Y_coord)){
+						addCircle(canvas, 'red', X_coord, Y_coord);
+						storeNode(X_coord, Y_coord);
+					}
 				}
 			});
 		});
 		
 		
+		function valid_coords(X, Y){
+			return !isNaN(X) && !isNaN(Y);
+		}
 
 		function addCircle(canvas, color, X, Y){
 			var circle = new fabric.Circle({
