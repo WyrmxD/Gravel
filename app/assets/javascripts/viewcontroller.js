@@ -37,7 +37,7 @@ var ViewController = {};
 	}
 
 	ns.display_boulder = function(boulder){
-		content.innerHTML = "";
+		clean_content();
 		var boulder_read_div = HtmlHelpers.gen_boulder_read_div();
 		content.innerHTML = boulder_read_div;
 
@@ -48,7 +48,7 @@ var ViewController = {};
 	 * New Boulder 
 	 */
 	ns.show_create_boulder = function(reset){
-		content.innerHTML = "";
+		clean_content();
 		var boulder_create_div = HtmlHelpers.gen_boulder_create_div();
 		content.innerHTML = boulder_create_div;
 
@@ -57,8 +57,20 @@ var ViewController = {};
 	}
 
 	/*
+	 * Edit Boulder
+	 */
+	ns.show_edit_boulder = function(boulder){
+		clean_content();
+	}
+
+	/*
 	 * HIDE & SEEK
 	 */
+
+	function clean_content(){
+		content.innerHTML = "";
+	}
+
 	ns.show_picture_preview = function(){
 		$('#js-picture_upload').hide();
 		
