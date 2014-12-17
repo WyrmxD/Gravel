@@ -20,7 +20,7 @@ var ReadBoulder = {};
 	function set_edit_boulder_event(){
 		$('#js-edit_icon').click(function(event){
 			event.preventDefault();
-			console.log('edit boulder');
+			ViewController.show_edit_boulder(boulder);
 		})
 	}
 

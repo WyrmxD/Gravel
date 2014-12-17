@@ -22,4 +22,8 @@ var HtmlHelpers = {};
 		return boulder_read_div_tpl;
 	}
 
+	ns.gen_boulder_edit_div = function(){
+		return boulder_edit_div_tpl;
+	}
+
 }(HtmlHelpers));

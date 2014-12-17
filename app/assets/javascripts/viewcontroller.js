@@ -60,7 +60,72 @@ var ViewController = {};
 	 * Edit Boulder
 	 */
 	ns.show_edit_boulder = function(boulder){
+		var boulder_picture = $('#boulder_picture').clone();
 		clean_content();
+		boulder_picture.prop('width', '100%');
+		boulder_picture.prop('display', 'hidden');
+		var boulder_edit_div = HtmlHelpers.gen_boulder_edit_div(boulder_picture);
+		content.innerHTML = boulder_edit_div;
+		$('#boulder_picture_col').prepend(boulder_picture);
+
+
+		var PICTURE_PATH = "uploads/"
+		var THUMBNAIL_PATH = "uploads/thumbs/"
+		var circles = []
+
+		var url = PICTURE_PATH + boulder.picture;
+		fabric.Image.fromURL(url, function(oImg) {
+			var width = $('#boulder_picture').width();
+			var height = $('#boulder_picture').height();
+			console.log(width, height);
+			
+			$('#boulder_picture').remove();
+			$('#canvas').prop('width', width);
+			$('#canvas').prop('height', height);
+			$('#canvas').removeAttr('visibility');
+			var canvas = new fabric.Canvas("canvas");
+			oImg.set({
+				width: width,
+				height: height,
+				originX: 'left',
+				originY: 'top'
+			});
+			canvas.setBackgroundImage(oImg, canvas.renderAll.bind(canvas));
+
+			canvas.on('mouse:down', function(options) {
+				var Y_coord = options.e.clientY - $('#canvas').offset().top;
+				var X_coord = options.e.clientX - $('#canvas').offset().left;
+
+				console.log(X_coord, Y_coord);
+				if (options.target) {
+					console.log('an object was clicked! ', options.target.type);
+				} else {
+					addCircle(canvas, 'red', X_coord, Y_coord);
+					storeNode(X_coord, Y_coord);
+				}
+			});
+		});
+		
+		
+
+		function addCircle(canvas, color, X, Y){
+			var circle = new fabric.Circle({
+				selectable: true,
+				opacity: 0.5,
+				radius: 15, 
+				hasControls: false, 
+				fill: color, 
+				left: X-15, 
+				top: Y-15
+			});
+			canvas.add(circle);
+		}
+
+		function storeNode(x,y){
+			circles.push({x:x, y:y});
+		}
+
+
 	}
 
 	/*
