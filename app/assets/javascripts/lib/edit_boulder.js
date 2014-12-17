@@ -10,11 +10,13 @@ var EditBoulder = {};
 
 	ns.initialize_edit_boulder = function(myBoulder){
 		boulder = myBoulder;
-		var url = PICTURE_PATH + boulder.picture;
-		ns.load_image(url);
+		ns.load_image();
+
+		// TODO check existent circles
 	}
 
-	ns.load_image = function(url){
+	ns.load_image = function(){
+		var url = PICTURE_PATH + boulder.picture;
 		fabric.Image.fromURL(url, function(oImg) {
 			var width = $('#boulder_picture').width();
 			var height = $('#boulder_picture').height();
@@ -29,13 +31,14 @@ var EditBoulder = {};
 		embed_image(canvas, oImg, width, height);
 
 		set_canvas_mouse_events(canvas);
+		set_canvas_resize_window_event(canvas);
 	}
 
 	function create_canvas(width, height){
-		$('#boulder_picture').remove();
+		$('#boulder_picture').css('display','none');
 		$('#canvas').prop('width', width);
 		$('#canvas').prop('height', height);
-		$('#canvas').removeAttr('visibility');
+		$('#canvas').show();
 		
 		var canvas = new fabric.Canvas("canvas", {
 			selection: false
@@ -68,6 +71,31 @@ var EditBoulder = {};
 				}
 			}
 		});
+	}
+
+	function set_canvas_resize_window_event(canvas){
+		$(window).unbind('resize');
+		$(window).resize(function(){ 
+			console.log('resized');
+			canvas.dispose();
+			// $('#canvas').hide();
+			$('#boulder_picture').css('display','block');
+			$('#boulder_picture').css('visibility','visible');
+			var boulder_picture = $('#boulder_picture').clone();
+			replace_canvas();
+
+			ns.load_image();
+
+		});
+	}
+
+	function replace_canvas(){
+		$('#canvas_container').empty();
+		var new_canvas = document.createElement('CANVAS');
+		new_canvas.id = 'canvas';
+		$(new_canvas).addClass('picture_canvas');
+		$(new_canvas).hide();
+		$('#canvas_container').append(new_canvas);
 	}
 	
 	

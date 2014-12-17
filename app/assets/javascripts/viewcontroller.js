@@ -63,7 +63,7 @@ var ViewController = {};
 		var boulder_picture = $('#boulder_picture').clone();
 		clean_content();
 		boulder_picture.prop('width', '100%');
-		boulder_picture.prop('display', 'hidden');
+		boulder_picture.css('visibility', 'hidden');
 		var boulder_edit_div = HtmlHelpers.gen_boulder_edit_div(boulder_picture);
 		content.innerHTML = boulder_edit_div;
 		$('.boulder_read_name').append(boulder.name);
