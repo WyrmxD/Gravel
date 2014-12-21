@@ -43,3 +43,5 @@ bower_components
 bower.json
 
 public/uploads
+
+jasmine_examples/
