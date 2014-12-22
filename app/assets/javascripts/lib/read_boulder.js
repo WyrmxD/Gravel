@@ -24,5 +24,9 @@ var ReadBoulder = {};
 		})
 	}
 
+	ns.errorGetBoulder = function(data){
+		console.log("error GET ", data);
+	}
+
 
 }(ReadBoulder));

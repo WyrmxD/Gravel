@@ -120,7 +120,7 @@ var CreateBoulder = {};
 				var fd = prepare_boulder_data();
 
 				ViewController.show_progress_bar();
-				API.post_form('boulder.api_boulder_create_path', fd, succ_boulder_sent);
+				API.post_form('boulder.api_boulder_create_path', fd, onSuccess_boulder_sent, onError_boulder_sent);
 			} else {
 				ViewController.show_message('What about you filling the stuff above?', 'warning', 10000);
 			}
@@ -144,12 +144,16 @@ var CreateBoulder = {};
 		return fd;
 	}
 
-	function succ_boulder_sent(response){
+	function onSuccess_boulder_sent(response){
 		boulder_draft.id = $.parseJSON(response.target.responseText).boulder_id;
 		var msg = 'Boulder created! <a href="/#boulder/'+ boulder_draft.id +'">check it</a>';
 		ViewController.show_message(msg, 'success');
 		boulder_draft = null;
 		$('#js-send_boulder_form').unbind('click');
+	}
+
+	function onError_boulder_sent(){
+		alert("There was an error attempting to upload the boulder.");
 	}
 
 	function set_geolocate_button_event(){
