@@ -39,29 +39,15 @@ var API = {};
 		});
 	}
 
-	ns.post_form = function(path, form_data, onSuccess, onError){
+	ns.post_form = function(path, form_data, onSuccess, onError, onProgress, onAbort){
 		var xhr = new XMLHttpRequest(); 
 		xhr.addEventListener("load", onSuccess, false); 
 		xhr.addEventListener("error", onError, false); 
-		xhr.upload.addEventListener("progress", uploadProgress, false); 
-		xhr.addEventListener("abort", uploadCanceled, false); 
+		xhr.upload.addEventListener("progress", onProgress, false); 
+		xhr.addEventListener("abort", onAbort, false); 
 		xhr.open("POST", "/api/boulder", true);
 
 		xhr.send(form_data);
-	}
-
-	function uploadProgress(evt) {
-
-		if (evt.lengthComputable) {
-			var percentComplete = Math.round(evt.loaded * 100 / evt.total).toString() + '%';
-			CreateBoulder.update_progress_bar(percentComplete);
-		} else { 
-			CreateBoulder.update_progress_bar('0% error uploading');
-		}
-	}
- 
-	function uploadCanceled(evt) {
-		alert("The upload has been canceled by the user or the browser dropped the connection.");
 	}
 
 }(API));
