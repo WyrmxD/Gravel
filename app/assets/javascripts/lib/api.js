@@ -3,7 +3,7 @@
 var API = {};
 (function(ns){
 
-	var base_url = "http://localhost:3000";
+	var base_url = window.location.origin;
 	var routes = {
 		'boulder': {
 			'api_boulder_path': 		'/api/boulder',
