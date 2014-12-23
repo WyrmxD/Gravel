@@ -14,7 +14,7 @@ var ViewController = {};
 	 * Boulders List
 	 */
 	ns.show_boulders = function(uri){
-		API.get('boulder.api_boulder_path', ns.display_boulders, get_offset_limit(uri));
+		API.get('boulder.api_boulder_path', ns.display_boulders, errorGetBoulders, get_offset_limit(uri));
 	}
 	
 	ns.display_boulders = function(boulders){
@@ -22,6 +22,10 @@ var ViewController = {};
 		content.innerHTML = "";
 		var boulder_div = HtmlHelpers.gen_boulder_grid(boulders_stored);
 		content.appendChild(boulder_div);
+	}
+
+	function errorGetBoulders(data){
+		console.log("error GET ", data);
 	}
 
 	function get_offset_limit(uri){
@@ -33,7 +37,7 @@ var ViewController = {};
 	 * Read Boulder
 	 */
 	ns.show_boulder = function(boulder_id){
-		API.get('boulder.api_boulder_read_path', ns.display_boulder, boulder_id)
+		API.get('boulder.api_boulder_read_path', ns.display_boulder, ReadBoulder.errorGetBoulder, boulder_id)
 	}
 
 	ns.display_boulder = function(boulder){
@@ -99,10 +103,6 @@ var ViewController = {};
 		$('#js-progress_div').show();
 	}
 
-	ns.hide_progress_bar = function(){
-		$('#js-progress_div').hide();
-	}
-
 	ns.show_message = function(str, type, milliseconds){
 		var js_message_display = $('#js-message_display');
 		set_message_type(js_message_display, type);
@@ -111,7 +111,6 @@ var ViewController = {};
 		js_message_display.removeClass('hidden');
 		js_message_display.show();
 		if(milliseconds != undefined){
-			console.log('hide?', milliseconds != undefined);
 			hide_message(milliseconds);
 		}
 	}
