@@ -103,10 +103,6 @@ var ViewController = {};
 		$('#js-progress_div').show();
 	}
 
-	ns.hide_progress_bar = function(){
-		$('#js-progress_div').hide();
-	}
-
 	ns.show_message = function(str, type, milliseconds){
 		var js_message_display = $('#js-message_display');
 		set_message_type(js_message_display, type);
